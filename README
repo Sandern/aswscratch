@@ -1,0 +1,53 @@
+==============================================================
+Description
+==============================================================
+Provides a basic sdk template for Alien Swarm including the following features:
+- All specific Alien Swarm code is stripped from the project
+- SDK Player with DOD model (from the 2007 sdk template)
+- Player Animation State based off the Alien Swarm animation state
+- Most of the Game UI is left intact, although the campaign and match making options won't work.
+
+==============================================================
+Usage
+==============================================================
+1. Copy the scratch folder into your sourcemods directory.
+2. Open scratch_sdk.sln in Visual Studio 2010.
+3. Change paths so the binaries are copied into the correct folder.
+4. Compile
+5. Start the mod, open the console and type "map sdk_teams_hdr"
+
+==============================================================
+Base Code Changes
+==============================================================
+Client changes:
+- Added preprocessor SDK_CLIENT_DLL 
+- cdll_client_int.cpp: basemodpanel include
+                       ConfigureCurrentSystemLevel: Changed "sdk" to "swarm" to prevent errors in console.
+                       The other solution would be to change the ekv files in the config folder.
+- view.cpp: basemodpanel include.
+- c_baseanimating.cpp: FireEvent, AE_MUZZLEFLASH -> added fix for thirdperson (might not be needed).
+
+Server changes:
+- Added preprocessor SDK_DLL
+- npc_combinegunship.cpp: #ifndef'ed GetCitizenResponse() parts.
+
+Shared changes:
+- Added preprocessor SDK_DLL
+- Added ACT_DOD_ activies to ai_activity.h, ai_activity.cpp and activitylist.cpp
+- basecombatweapon_shared.cpp: SetActivity fix from 2007, SetModel stuff (might not be needed).
+
+Misc:
+memoverride.cpp: removed _invalid_parameter_noinfo for vs2010 debug mode.
+
+Gameui:
+The following parts of the gameui contain specific code for alien swarm, they are #if 0'ed out.
+The result is that the campaign and match making options won't work (since they are initialized empty).
+Most of the this is related to missions/campaigns.
+basemodpanel.cpp (OnLevelLoadingStarted)
+vingamemainmenu.cpp (OnCommand, ShowPlayerList)
+vfoundgames.cpp
+vfoundpublicgames.cpp
+vgamesettings.cpp
+vleaderboard.cpp
+vcustomcampaigns.cpp
+vingamechapterselect.cpp
