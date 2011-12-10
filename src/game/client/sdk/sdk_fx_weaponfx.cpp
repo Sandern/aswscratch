@@ -45,7 +45,7 @@ void SDK_EjectBrass( int shell, const CEffectData &data )
 						dir[2] + random->RandomFloat(  0,64) );
 
 	C_LocalTempEntity *pBrass = tempents->SpawnTempModel( pModel, data.m_vOrigin, data.m_vAngles, velocity,
-		gpGlobals->curtime + 1.0f + random->RandomFloat( 0.0f, 1.0f ), FTENT_COLLIDEWORLD | FTENT_FADEOUT | FTENT_GRAVITY | FTENT_ROTATE);
+		1.0f + random->RandomFloat( 0.0f, 1.0f ), FTENT_COLLIDEWORLD | FTENT_FADEOUT | FTENT_GRAVITY | FTENT_ROTATE);
 
 	//Keep track of shell type
 	if ( shell == 2 )
