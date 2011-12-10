@@ -1820,6 +1820,9 @@
     <ClCompile Include="..\shared\sdk\weapon_pistol.cpp">
       <Filter>Source Files\sdk\Shared</Filter>
     </ClCompile>
+    <ClCompile Include="hud_weapon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="achievement_notification_panel.h">
