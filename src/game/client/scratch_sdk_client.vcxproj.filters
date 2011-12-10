@@ -1598,9 +1598,6 @@
     <ClCompile Include="sdk\vgui\sdk_hud_chat.cpp">
       <Filter>Source Files\sdk\vgui</Filter>
     </ClCompile>
-    <ClCompile Include="sdk\vgui\sdk_hud_weapons.cpp">
-      <Filter>Source Files\sdk\vgui</Filter>
-    </ClCompile>
     <ClCompile Include="sdk\gameui\sdk\uiavatarimage.cpp">
       <Filter>Source Files\sdk\GameUI - Embedded\SDK GameUI</Filter>
     </ClCompile>

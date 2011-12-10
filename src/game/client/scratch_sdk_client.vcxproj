@@ -54,7 +54,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <PreBuildEvent>
-      <Command>if EXIST "D:\Steam\SteamApps\sourcemods\sometest3\bin\.\$(TargetFileName)" for /f "delims=" %%A in (%27attrib "D:\Steam\SteamApps\sourcemods\sometest3\bin\.\$(TargetFileName)"%27) do set valveTmpIsReadOnly="%%A"
+      <Command>if EXIST "D:\Steam\SteamApps\sourcemods\scratch\bin\.\$(TargetFileName)" for /f "delims=" %%A in (%27attrib "D:\Steam\SteamApps\sourcemods\scratch\bin\.\$(TargetFileName)"%27) do set valveTmpIsReadOnly="%%A"
 set valveTmpIsReadOnlyLetter=%valveTmpIsReadOnly:~6,1%
 if "%valveTmpIsReadOnlyLetter%"=="R" del /q "$(TargetDir)"$(TargetFileName)
 if exist ..\..\devtools\bin\vpccrccheck.exe ..\..\devtools\bin\vpccrccheck.exe -crc2 test_swarm.vcproj
@@ -125,13 +125,13 @@ if ERRORLEVEL 1 exit 1
     </Bscmake>
     <PostBuildEvent>
       <Message>Publishing to D:\Steam\SteamApps\sourcemods\sometest3\bin\.</Message>
-      <Command>if exist "D:\Steam\SteamApps\sourcemods\sometest3\bin\." goto ValveStart
-mkdir "D:\Steam\SteamApps\sourcemods\sometest3\bin\."
+      <Command>if exist "D:\Steam\SteamApps\sourcemods\scratch\bin\." goto ValveStart
+mkdir "D:\Steam\SteamApps\sourcemods\scratch\bin\."
 :ValveStart
-copy "$(TargetDir)"$(TargetFileName) "D:\Steam\SteamApps\sourcemods\sometest3\bin\.\$(TargetFileName)"
+copy "$(TargetDir)"$(TargetFileName) "D:\Steam\SteamApps\sourcemods\scratch\bin\.\$(TargetFileName)"
 if ERRORLEVEL 1 goto BuildEventFailed
-if exist "$(TargetDir)"$(TargetName).map copy "$(TargetDir)"$(TargetName).map "D:\Steam\SteamApps\sourcemods\sometest3\bin\.\$(TargetName).map"
-copy "$(TargetDir)"$(TargetName).pdb "D:\Steam\SteamApps\sourcemods\sometest3\bin\.\$(TargetName).pdb"
+if exist "$(TargetDir)"$(TargetName).map copy "$(TargetDir)"$(TargetName).map "D:\Steam\SteamApps\sourcemods\scratch\bin\.\$(TargetName).map"
+copy "$(TargetDir)"$(TargetName).pdb "D:\Steam\SteamApps\sourcemods\scratch\bin\.\$(TargetName).pdb"
 if ERRORLEVEL 1 goto BuildEventFailed
 goto BuildEventOK
 :BuildEventFailed
@@ -1106,7 +1106,6 @@ exit 1
     <ClCompile Include="sdk\vgui\sdk_hud_ammo.cpp" />
     <ClCompile Include="sdk\vgui\sdk_hud_chat.cpp" />
     <ClCompile Include="sdk\vgui\sdk_hud_health.cpp" />
-    <ClCompile Include="sdk\vgui\sdk_hud_weapons.cpp" />
     <ClCompile Include="sdk\vgui\sdk_hud_weaponselection.cpp" />
     <ClCompile Include="sdk\vgui\sdk_loading_panel.cpp" />
     <ClCompile Include="sdk\vgui\sdk_logo_panel.cpp" />

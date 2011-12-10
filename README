@@ -7,14 +7,29 @@ Provides a basic sdk template for Alien Swarm including the following features:
 - Player Animation State based off the Alien Swarm animation state
 - Most of the Game UI is left intact, although the campaign and match making options won't work.
 
+Video:
+http://www.youtube.com/watch?v=Lq3b-bSdd1k
+
 ==============================================================
 Usage
 ==============================================================
 1. Copy the scratch folder into your sourcemods directory.
 2. Open scratch_sdk.sln in Visual Studio 2010.
 3. Change paths so the binaries are copied into the correct folder.
+     - Right click the server project and open properties
+     - Go to Configuration Properties -> Build Events
+     - Ensure paths Pre-Build and Post-Build events point to your sourcemods folder.
+     - Do the same for the client project
 4. Compile
-5. Start the mod, open the console and type "map sdk_teams_hdr"
+5. Check if binaries are copied correctly into your mods bin folder.
+6. Start the mod, open the console and type "map sdk_teams_hdr"
+
+==============================================================
+VPK
+==============================================================
+The Alien Swarm VPK files take priority over the mod files.
+To solve this use either the "-override_vpk" or pack the files
+being overriden in a vpk file (see pakfiles.bat/txt).
 
 ==============================================================
 Base Code Changes
