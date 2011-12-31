@@ -23,6 +23,9 @@ Usage
      - Do the same for the client project
 4. Compile
 5. Check if binaries are copied correctly into your mods bin folder.
+6. Either run pakfiles.bat (in the mod folder) or specify "-override_vpk"
+   in the launch parameters. Otherwise some files will be overriden
+   by the alien swarm files (like scripts/HudLayout.res).
 6. Start the mod, open the console and type "map sdk_teams_hdr"
 
 ==============================================================
@@ -31,8 +34,6 @@ VPK
 The Alien Swarm VPK files take priority over the mod files.
 To solve this use either the "-override_vpk" or pack the files
 being overriden in a vpk file (see pakfiles.bat/txt).
-You can also use sv_consistency convar to turn these checks 
-off.
 
 ==============================================================
 Alien Swarm Consistency checks
@@ -40,7 +41,8 @@ Alien Swarm Consistency checks
 ClientPrecache in client.cpp marks several alien swarm files
 for consistency checks (ForceExactFile..) and prevent the player
 from joining if the files don't match. You might want to change
-these.
+these. You can also use sv_consistency convar to turn these checks 
+off.
 
 ==============================================================
 Base Code Changes
