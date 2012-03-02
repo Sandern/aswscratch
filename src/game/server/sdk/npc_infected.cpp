@@ -203,9 +203,9 @@ void CNPC_Infected::SetZombieModel( void )
 	SetModel( "models/infected/common_male01.mdl" );
 	SetHullType( HULL_HUMAN );
 		
-	SetBodygroup ( 0, RandomInt (0, 3 ) );
-	SetBodygroup ( 1, RandomInt (0, 5 ) );
-	SetBodygroup ( 2, RandomInt (0, 3 ) );
+	SetBodygroup ( 0, RandomInt (0, 3 ) ); // Head
+	SetBodygroup ( 1, RandomInt (0, 5 ) ); // Upper body
+	//SetBodygroup ( 2, RandomInt (0, 3 ) ); // Lower body, changes the number of legs cut off
 		
 	m_nSkin = random->RandomInt( 0, INFECTED_SKIN_COUNT-1 );
 #else
