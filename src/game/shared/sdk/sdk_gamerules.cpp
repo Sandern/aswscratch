@@ -112,6 +112,32 @@ void CSDKGameRules::PlayerSpawn( CBasePlayer *p )
 	pPlayer->SetMaxSpeed( 600 );
 }
 
+void CSDKGameRules::InitDefaultAIRelationships( void )
+{
+		int i, j;
+
+		//  Allocate memory for default relationships
+		CBaseCombatCharacter::AllocateDefaultRelationships();
+
+		// --------------------------------------------------------------
+		// First initialize table so we can report missing relationships
+		// --------------------------------------------------------------
+		for (i=0;i<LAST_SHARED_ENTITY_CLASS;i++)
+		{
+			for (j=0;j<LAST_SHARED_ENTITY_CLASS;j++)
+			{
+				// By default all relationships are neutral of priority zero
+				CBaseCombatCharacter::SetDefaultRelationship( (Class_T)i, (Class_T)j, D_NU, 0 );
+			}
+		}
+
+		// ------------------------------------------------------------
+		//	> CLASS_ZOMBIE
+		// ------------------------------------------------------------	
+		CBaseCombatCharacter::SetDefaultRelationship(CLASS_ZOMBIE,			CLASS_NONE,				D_NU, 0);			
+		CBaseCombatCharacter::SetDefaultRelationship(CLASS_ZOMBIE,			CLASS_PLAYER,			D_HT, 0);			
+}
+
 #endif // CLIENT_DLL
 
 

@@ -1535,6 +1535,9 @@
     <ClCompile Include="..\shared\sdk\weapon_pistol.cpp">
       <Filter>Source Files\sdk\Shared</Filter>
     </ClCompile>
+    <ClCompile Include="sdk\npc_infected.cpp">
+      <Filter>Source Files\sdk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\shared\achievement_saverestore.h">

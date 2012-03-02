@@ -76,7 +76,6 @@ class IMatchExtSwarm *g_pMatchExtSwarm = NULL;
 typedef BaseModUI::CBaseModPanel UI_BASEMOD_PANEL_CLASS;
 inline UI_BASEMOD_PANEL_CLASS & GetUiBaseModPanelClass() { return UI_BASEMOD_PANEL_CLASS::GetSingleton(); }
 inline UI_BASEMOD_PANEL_CLASS & ConstructUiBaseModPanelClass() { return * new UI_BASEMOD_PANEL_CLASS(); }
-//class IMatchExtSwarm *g_pMatchExtSwarm = NULL;
 
 #else
 
@@ -262,7 +261,7 @@ void CGameUI::PostInit()
 		enginesound->PrecacheSound( "UI/menu_countdown.wav", true, true );
 	}
 
-#ifdef SWARM_DLL
+#ifdef SDK_CLIENT_DLL
 	// to know once client dlls have been loaded
 	BaseModUI::CUIGameData::Get()->OnGameUIPostInit();
 #endif
@@ -815,6 +814,7 @@ void CGameUI::OnLevelLoadingFinished(bool bError, const char *failureReason, con
 	// notify all the modules
 	g_VModuleLoader.PostMessageToAllModules( new KeyValues( "LoadingFinished" ) );
 
+	GetUiBaseModPanelClass().OnLevelLoadingFinished( new KeyValues( "LoadingFinished" ) );
 	HideLoadingBackgroundDialog();
 
 
@@ -1047,14 +1047,14 @@ bool CGameUI::HasLoadingBackgroundDialog()
 
 void CGameUI::NeedConnectionProblemWaitScreen()
 {
-#ifdef SWARM_DLL
+#ifdef SDK_CLIENT_DLL
 	BaseModUI::CUIGameData::Get()->NeedConnectionProblemWaitScreen();
 #endif
 }
 
 void CGameUI::ShowPasswordUI( char const *pchCurrentPW )
 {
-#ifdef SWARM_DLL
+#ifdef SDK_CLIENT_DLL
 	BaseModUI::CUIGameData::Get()->ShowPasswordUI( pchCurrentPW );
 #endif
 }

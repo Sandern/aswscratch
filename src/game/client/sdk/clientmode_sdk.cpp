@@ -2,6 +2,8 @@
 #include "clientmode_sdk.h"
 #include "vgui_int.h"
 #include "ienginevgui.h"
+#include "cdll_client_int.h"
+#include "engine/IEngineSound.h"
 
 #include "sdk_loading_panel.h"
 #include "sdk_logo_panel.h"
@@ -22,8 +24,8 @@ vgui::DHANDLE<CSDK_Logo_Panel> g_hLogoPanel;
 static IClientMode *g_pClientMode[ MAX_SPLITSCREEN_PLAYERS ];
 IClientMode *GetClientMode()
 {
-	Assert( engine->IsLocalPlayerResolvable() );
-	return g_pClientMode[ engine->GetActiveSplitScreenPlayerSlot() ];
+	ASSERT_LOCAL_PLAYER_RESOLVABLE();
+	return g_pClientMode[ GET_ACTIVE_SPLITSCREEN_SLOT() ];
 }
 
 // --------------------------------------------------------------------------------- //
@@ -85,15 +87,21 @@ void CSDKModeManager::LevelShutdown( void )
 ClientModeSDK g_ClientModeNormal[ MAX_SPLITSCREEN_PLAYERS ];
 IClientMode *GetClientModeNormal()
 {
-	Assert( engine->IsLocalPlayerResolvable() );
-	return &g_ClientModeNormal[ engine->GetActiveSplitScreenPlayerSlot() ];
+	ASSERT_LOCAL_PLAYER_RESOLVABLE();
+	return &g_ClientModeNormal[ GET_ACTIVE_SPLITSCREEN_SLOT() ];
 }
 
 ClientModeSDK* GetClientModeSDK()
 {
-	Assert( engine->IsLocalPlayerResolvable() );
-	return &g_ClientModeNormal[ engine->GetActiveSplitScreenPlayerSlot() ];
+	ASSERT_LOCAL_PLAYER_RESOLVABLE();
+	return &g_ClientModeNormal[ GET_ACTIVE_SPLITSCREEN_SLOT() ];
 }
+
+// these vgui panels will be closed at various times (e.g. when the level ends/starts)
+static char const *s_CloseWindowNames[]={
+	"InfoMessageWindow",
+	"SkipIntro",
+};
 
 //-----------------------------------------------------------------------------
 // Purpose: this is the viewport that contains all the hud elements
@@ -201,6 +209,13 @@ IClientMode *GetFullscreenClientMode( void )
 	return &g_FullscreenClientMode;
 }
 
+
+void ClientModeSDK::Init()
+{
+	BaseClass::Init();
+
+	gameeventmanager->AddListener( this, "game_newmap", false );
+}
 void ClientModeSDK::Shutdown()
 {
 	if ( SDKBackgroundMovie() )
@@ -218,6 +233,101 @@ void ClientModeSDK::InitViewport()
 {
 	m_pViewport = new CHudViewport();
 	m_pViewport->Start( gameuifuncs, gameeventmanager );
+}
+
+void ClientModeSDK::LevelInit( const char *newmap )
+{
+	// reset ambient light
+	static ConVarRef mat_ambient_light_r( "mat_ambient_light_r" );
+	static ConVarRef mat_ambient_light_g( "mat_ambient_light_g" );
+	static ConVarRef mat_ambient_light_b( "mat_ambient_light_b" );
+
+	if ( mat_ambient_light_r.IsValid() )
+	{
+		mat_ambient_light_r.SetValue( "0" );
+	}
+
+	if ( mat_ambient_light_g.IsValid() )
+	{
+		mat_ambient_light_g.SetValue( "0" );
+	}
+
+	if ( mat_ambient_light_b.IsValid() )
+	{
+		mat_ambient_light_b.SetValue( "0" );
+	}
+
+	BaseClass::LevelInit(newmap);
+
+	// sdk: make sure no windows are left open from before
+	SDK_CloseAllWindows();
+
+	// clear any DSP effects
+	CLocalPlayerFilter filter;
+	enginesound->SetRoomType( filter, 0 );
+	enginesound->SetPlayerDSP( filter, 0, true );
+}
+
+void ClientModeSDK::LevelShutdown( void )
+{
+	BaseClass::LevelShutdown();
+
+	// sdk:shutdown all vgui windows
+	SDK_CloseAllWindows();
+}
+void ClientModeSDK::FireGameEvent( IGameEvent *event )
+{
+	const char *eventname = event->GetName();
+
+	if ( Q_strcmp( "asw_mission_restart", eventname ) == 0 )
+	{
+		SDK_CloseAllWindows();
+	}
+	else if ( Q_strcmp( "game_newmap", eventname ) == 0 )
+	{
+		engine->ClientCmd("exec newmapsettings\n");
+	}
+	else
+	{
+		BaseClass::FireGameEvent(event);
+	}
+}
+// Close all ASW specific VGUI windows that the player might have open
+void ClientModeSDK::SDK_CloseAllWindows()
+{
+	SDK_CloseAllWindowsFrom(GetViewport());
+}
+
+// recursive search for matching window names
+void ClientModeSDK::SDK_CloseAllWindowsFrom(vgui::Panel* pPanel)
+{
+	if (!pPanel)
+		return;
+
+	int num_names = NELEMS(s_CloseWindowNames);
+
+	for (int k=0;k<pPanel->GetChildCount();k++)
+	{
+		Panel *pChild = pPanel->GetChild(k);
+		if (pChild)
+		{
+			SDK_CloseAllWindowsFrom(pChild);
+		}
+	}
+
+	// When VGUI is shutting down (i.e. if the player closes the window), GetName() can return NULL
+	const char *pPanelName = pPanel->GetName();
+	if ( pPanelName != NULL )
+	{
+		for (int i=0;i<num_names;i++)
+		{
+			if ( !strcmp( pPanelName, s_CloseWindowNames[i] ) )
+			{
+				pPanel->SetVisible(false);
+				pPanel->MarkForDeletion();
+			}
+		}
+	}
 }
 
 void ClientModeSDK::DoPostScreenSpaceEffects( const CViewSetup *pSetup )

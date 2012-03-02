@@ -178,8 +178,8 @@ void VGUI_DestroyClientDLLRootPanel( void )
 //-----------------------------------------------------------------------------
 vgui::VPANEL VGui_GetClientDLLRootPanel( void )
 {
-	Assert( engine->IsLocalPlayerResolvable() );
-	return g_pRootPanel[ engine->GetActiveSplitScreenPlayerSlot() ]->GetVPanel();
+	ASSERT_LOCAL_PLAYER_RESOLVABLE();
+	return g_pRootPanel[ GET_ACTIVE_SPLITSCREEN_SLOT() ]->GetVPanel();
 }
 
 

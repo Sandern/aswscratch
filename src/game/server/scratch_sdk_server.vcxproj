@@ -693,6 +693,7 @@ exit 1
     </ClCompile>
     <ClCompile Include="scripted.cpp" />
     <ClCompile Include="scriptedtarget.cpp" />
+    <ClCompile Include="sdk\npc_infected.cpp" />
     <ClCompile Include="sdk\sdk_client.cpp" />
     <ClCompile Include="sdk\sdk_fire.cpp" />
     <ClCompile Include="sdk\sdk_gameinterface.cpp" />

@@ -46,6 +46,8 @@ public:
 	virtual void PlayerThink( CBasePlayer *pPlayer ) {}
 
 	virtual void PlayerSpawn( CBasePlayer *pPlayer );
+
+	virtual void			InitDefaultAIRelationships( void );
 #endif // CLIENT_DLL
 
 	// misc
