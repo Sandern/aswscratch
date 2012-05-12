@@ -1538,6 +1538,12 @@
     <ClCompile Include="sdk\npc_infected.cpp">
       <Filter>Source Files\sdk</Filter>
     </ClCompile>
+    <ClCompile Include="sdk\sdk_bot_temp.cpp">
+      <Filter>Source Files\sdk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\predicted_viewmodel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\shared\achievement_saverestore.h">
@@ -3201,6 +3207,12 @@
     </ClInclude>
     <ClInclude Include="..\shared\sdk\sdk_fx_shared.h">
       <Filter>Source Files\sdk\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\sdk_bot_temp.h">
+      <Filter>Source Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\predicted_viewmodel.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

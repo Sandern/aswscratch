@@ -150,6 +150,9 @@ void GameStartFrame( void )
 		return;
 
 	gpGlobals->teamplay = (teamplay.GetInt() != 0);
+
+	extern void Bot_RunAll();
+	Bot_RunAll();
 }
 
 

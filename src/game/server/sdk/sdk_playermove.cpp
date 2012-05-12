@@ -56,7 +56,7 @@ void CSDK_PlayerMove::SetupMove( CBasePlayer *player, CUserCmd *ucmd, IMoveHelpe
 	BaseClass::SetupMove( player, ucmd, pHelper, move );
 
 	// setup trace optimization
-	//g_pGameMovement->SetupMovementBounds( move );
+	g_pGameMovement->SetupMovementBounds( move );
 }
 
 void CSDK_PlayerMove::RunCommand( CBasePlayer *player, CUserCmd *ucmd, IMoveHelper *moveHelper )

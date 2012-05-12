@@ -61,7 +61,7 @@ void CSDK_Prediction::SetupMove( C_BasePlayer *player, CUserCmd *ucmd, IMoveHelp
 	}
 
 	// setup trace optimization
-	//g_pGameMovement->SetupMovementBounds( move );
+	g_pGameMovement->SetupMovementBounds( move );
 }
 
 extern void DiffPrint( bool bServer, int nCommandNumber, char const *fmt, ... );

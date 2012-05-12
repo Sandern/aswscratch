@@ -113,7 +113,9 @@ CNPC_Infected::~CNPC_Infected()
 
 void CNPC_Infected::Precache()
 {
+#ifndef INFECTED_ALLMODELS
 	PrecacheModel( "models/infected/common_male01.mdl" );
+#else
 	PrecacheModel( "models/infected/common_female_rural01.mdl");
 	PrecacheModel( "models/infected/common_worker_male01.mdl");
 	PrecacheModel( "models/infected/common_tsaagent_male01.mdl");
@@ -147,6 +149,7 @@ void CNPC_Infected::Precache()
     PrecacheScriptSound("Zombie.ClawScrape");
     PrecacheScriptSound("Zombie.Punch");
     PrecacheScriptSound("MegaMobIncoming");
+#endif // INFECTED_ALLMODELS
 
 	BaseClass::Precache();
 }
@@ -199,7 +202,7 @@ Class_T CNPC_Infected::Classify()
 //---------------------------------------------------------
 void CNPC_Infected::SetZombieModel( void )
 {
-#if 1
+#ifndef INFECTED_ALLMODELS
 	SetModel( "models/infected/common_male01.mdl" );
 	SetHullType( HULL_HUMAN );
 		
@@ -421,7 +424,7 @@ void CNPC_Infected::SetZombieModel( void )
 			break;
 		}
 	}
-#endif // 0
+#endif // INFECTED_ALLMODELS
 }
 
 

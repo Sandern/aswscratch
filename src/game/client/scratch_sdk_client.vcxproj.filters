@@ -1823,6 +1823,9 @@
     <ClCompile Include="hud_weapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\shared\predicted_viewmodel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="achievement_notification_panel.h">
@@ -3981,6 +3984,9 @@
     </ClInclude>
     <ClInclude Include="..\shared\sdk\sdk_player_shared.h">
       <Filter>Source Files\sdk\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\predicted_viewmodel.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

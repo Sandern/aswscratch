@@ -8,6 +8,7 @@
 #include "cbase.h"
 #include "sdk_player.h"
 #include "sdk_shareddefs.h"
+#include "predicted_viewmodel.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -191,4 +192,23 @@ void CSDK_Player::GiveDefaultItems()
 
 	GiveNamedItem( "weapon_pistol" );
 	GiveNamedItem( "weapon_mp5" );
+}
+
+void CSDK_Player::CreateViewModel( int index /*=0*/ )
+{
+	Assert( index >= 0 && index < MAX_VIEWMODELS );
+
+	if ( GetViewModel( index ) )
+		return;
+
+	CPredictedViewModel *vm = ( CPredictedViewModel * )CreateEntityByName( "predicted_viewmodel" );
+	if ( vm )
+	{
+		vm->SetAbsOrigin( GetAbsOrigin() );
+		vm->SetOwner( this );
+		vm->SetIndex( index );
+		DispatchSpawn( vm );
+		vm->FollowEntity( this, false );
+		m_hViewModel.Set( index, vm );
+	}
 }

@@ -252,6 +252,7 @@ exit 1
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\shared\predicted_viewmodel.cpp" />
     <ClCompile Include="..\shared\sdk\sdk_fx_shared.cpp" />
     <ClCompile Include="..\shared\sdk\sdk_gamemovement.cpp" />
     <ClCompile Include="..\shared\sdk\sdk_gamerules.cpp" />
@@ -1296,6 +1297,7 @@ exit 1
     <ClCompile Include="toolframework_client.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\shared\predicted_viewmodel.h" />
     <ClInclude Include="..\shared\sdk\sdk_fx_shared.h" />
     <ClInclude Include="..\shared\sdk\sdk_gamerules.h" />
     <ClInclude Include="..\shared\sdk\sdk_movedata.h" />

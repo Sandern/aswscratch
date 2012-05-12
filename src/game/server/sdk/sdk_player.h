@@ -43,6 +43,7 @@ public:
 	void SetAnimation( PLAYER_ANIM playerAnim ) { return; }
 
 	CWeaponSDKBase *GetActiveSDKWeapon() const;
+	virtual void	CreateViewModel( int viewmodelindex = 0 );
 
 // In shared code.
 public:
