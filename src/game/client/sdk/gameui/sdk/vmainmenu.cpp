@@ -1281,6 +1281,10 @@ CON_COMMAND_F( openserverbrowser, "Opens server browser", 0 )
 		KeyValues *pSchemeKV = new KeyValues( "SetCustomScheme" );
 		pSchemeKV->SetString( "SchemeName", "SwarmServerBrowserScheme" );
 		g_VModuleLoader.PostMessageToAllModules( pSchemeKV );
+#else
+		KeyValues *pSchemeKV = new KeyValues( "SetCustomScheme" );
+		pSchemeKV->SetString( "SchemeName", "SourceScheme" );
+		g_VModuleLoader.PostMessageToAllModules( pSchemeKV );
 #endif
 	}
 }
