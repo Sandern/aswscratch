@@ -5,8 +5,8 @@ Provides a basic sdk template for Alien Swarm including the following features:
 - All specific Alien Swarm code is stripped from the project
 - SDK Player with DOD model (from the 2007 sdk template)
 - Player Animation State based off the Alien Swarm animation state
-- Most of the Game UI is left intact, although the campaign and match 
-  making options won't work.
+- Most of the Game UI is left intact. The campaign and mission select options 
+  are replaced by a simple level selector (reads from maplist.txt).
 
 Video:
 http://www.youtube.com/watch?v=Lq3b-bSdd1k
