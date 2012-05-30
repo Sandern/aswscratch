@@ -1105,6 +1105,9 @@ exit 1
     <ClCompile Include="sdk\sdk_prediction.cpp" />
     <ClCompile Include="sdk\vgui\nb_button.cpp" />
     <ClCompile Include="sdk\vgui\nb_header_footer.cpp" />
+    <ClCompile Include="sdk\vgui\nb_horiz_list.cpp" />
+    <ClCompile Include="sdk\vgui\nb_select_level_entry.cpp" />
+    <ClCompile Include="sdk\vgui\nb_select_level_panel.cpp" />
     <ClCompile Include="sdk\vgui\sdk_hud_ammo.cpp" />
     <ClCompile Include="sdk\vgui\sdk_hud_chat.cpp" />
     <ClCompile Include="sdk\vgui\sdk_hud_health.cpp" />
@@ -1445,6 +1448,9 @@ exit 1
     <ClInclude Include="sdk\sdk_input.h" />
     <ClInclude Include="sdk\vgui\nb_button.h" />
     <ClInclude Include="sdk\vgui\nb_header_footer.h" />
+    <ClInclude Include="sdk\vgui\nb_horiz_list.h" />
+    <ClInclude Include="sdk\vgui\nb_select_level_entry.h" />
+    <ClInclude Include="sdk\vgui\nb_select_level_panel.h" />
     <ClInclude Include="sdk\vgui\sdk_hud_chat.h" />
     <ClInclude Include="sdk\vgui\sdk_loading_panel.h" />
     <ClInclude Include="sdk\vgui\sdk_logo_panel.h" />

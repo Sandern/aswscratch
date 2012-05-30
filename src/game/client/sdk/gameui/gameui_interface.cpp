@@ -76,6 +76,7 @@ class IMatchExtSwarm *g_pMatchExtSwarm = NULL;
 typedef BaseModUI::CBaseModPanel UI_BASEMOD_PANEL_CLASS;
 inline UI_BASEMOD_PANEL_CLASS & GetUiBaseModPanelClass() { return UI_BASEMOD_PANEL_CLASS::GetSingleton(); }
 inline UI_BASEMOD_PANEL_CLASS & ConstructUiBaseModPanelClass() { return * new UI_BASEMOD_PANEL_CLASS(); }
+class IMatchExtSwarm *g_pMatchExtSwarm = NULL;
 
 #else
 
@@ -214,12 +215,18 @@ void CGameUI::Initialize( CreateInterfaceFn factory )
 #ifdef SWARM_DLL
 	g_pMatchExtSwarm = ( IMatchExtSwarm * ) factory( IMATCHEXT_SWARM_INTERFACE, NULL );
 #endif
+#ifdef SDK_DLL
+	g_pMatchExtSwarm = ( IMatchExtSwarm * ) factory( IMATCHEXT_SWARM_INTERFACE, NULL );
+#endif
 	bFailed = !enginesurfacefuncs || !gameuifuncs || !enginevguifuncs ||
 		!xboxsystem ||
 #ifdef _X360
 		!xonline ||
 #endif
 #ifdef SWARM_DLL
+		!g_pMatchExtSwarm ||
+#endif
+#ifdef SDK_DLL
 		!g_pMatchExtSwarm ||
 #endif
 		!g_pMatchFramework;

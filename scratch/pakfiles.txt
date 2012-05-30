@@ -11,3 +11,7 @@ scripts\game_sounds_ui.txt
 scripts\game_sounds_vehicles.txt
 scripts\game_sounds_weapons.txt
 scripts\game_sounds_world.txt
+resource\ui\basemodui\campaignflyout.res
+resource\ui\basemodui\gamesettings.res
+resource\ui\basemodui\ingamemainmenu.res
+resource\ui\basemodui\mainmenu.res

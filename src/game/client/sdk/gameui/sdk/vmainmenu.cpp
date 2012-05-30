@@ -255,9 +255,8 @@ void MainMenu::OnCommand( const char *command )
 			" network offline "
 			" } "
 			" game { "
-			" mode single_mission "
-			" campaign jacob "
-			" mission asi-jac1-landingbay_pract "
+			" mode sdk "
+			" mission sdk_teams_hdr "
 			" } "
 			);
 			KeyValues::AutoDelete autodelete( pSettings );
@@ -280,9 +279,8 @@ void MainMenu::OnCommand( const char *command )
 				" network offline "
 				" } "
 				" Game { "
-				" mode campaign "
-				" campaign jacob "
-				" mission asi-jac1-landingbay_01 "
+				" mode sdk "
+				" mission sdk_teams_hdr "
 				" } "
 				);
 			KeyValues::AutoDelete autodelete( pSettings );
@@ -686,7 +684,7 @@ void MainMenu::OnCommand( const char *command )
 			" } "
 			" game { "
 			" mode = "
-			" campaign = "
+			" sdk = "
 			" mission = "
 			" } "
 			" options { "
@@ -695,10 +693,10 @@ void MainMenu::OnCommand( const char *command )
 			);
 		KeyValues::AutoDelete autodelete( pSettings );
 
-		char const *szGameMode = "campaign";
+		char const *szGameMode = "sdk";
 		pSettings->SetString( "game/mode", szGameMode );
 		pSettings->SetString( "game/campaign", "jacob" );
-		pSettings->SetString( "game/mission", "asi-jac1-landingbay_01" );
+		pSettings->SetString( "game/mission", "sdk_teams_hdr" );
 
 		if ( !CUIGameData::Get()->SignedInToLive() )
 		{

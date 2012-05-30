@@ -671,7 +671,6 @@ void Leaderboard::Activate()
 
 	m_Mode = LEADERBOARD_FRIENDS;
 
-#if 0
 	KeyValues *pInfoMission = NULL;
 	KeyValues *pInfoMap = g_pMatchExtSwarm->GetMapInfo( m_pDataSettings, &pInfoMission );
 	
@@ -705,7 +704,6 @@ void Leaderboard::Activate()
 		Warning( "No maps defined for '%s'\n", szGameMode );
 		return;
 	}
-#endif // 0
 
 #ifndef _X360
 	m_bIsSearching = false;
@@ -737,7 +735,6 @@ void Leaderboard::ApplySchemeSettings( IScheme *pScheme )
 //=============================================================================
 int Leaderboard::GetCurrentChapterContext( void )
 {
-#if 0
 	KeyValues *pMissionInfo = NULL;
 	if ( KeyValues *pMapInfo = g_pMatchExtSwarm->GetMapInfo( m_pDataSettings, &pMissionInfo ) )
 	{
@@ -753,7 +750,6 @@ int Leaderboard::GetCurrentChapterContext( void )
 			return CRC32_ProcessSingleBuffer( szStringVal, strlen( szStringVal ) );
 		}
 	}
-#endif // 0
 	return 0;
 }
 
@@ -810,11 +806,8 @@ void Leaderboard::OnMissionChapterChanged()
 	InitializeDropDownControls();
 
 	KeyValues *pInfoMission = NULL;
-#if 0
 	KeyValues *pInfoMap = g_pMatchExtSwarm->GetMapInfo( m_pDataSettings, &pInfoMission );
-#else
-	KeyValues *pInfoMap = NULL;
-#endif // 0
+
 	const char *pszChapter = pInfoMap ? pInfoMap->GetString( "displayname" ) : NULL;
 
 	if ( pInfoMap )
@@ -1610,13 +1603,10 @@ void Leaderboard::SetLeaderboardHandle( int iMapContext, SteamLeaderboard_t hLea
 void Leaderboard::GetLeaderboardName( int iMapContext, char *pszBuf, int iBufLen )
 {
 	// name = "<mapname>_<gamemode>"
-#if 0
+
 	KeyValues *pInfoMission = NULL;
 	KeyValues *pInfoMap = g_pMatchExtSwarm->GetMapInfo( m_pDataSettings, &pInfoMission );
-#else
-	KeyValues *pInfoMap = NULL;
-#endif // 0
-	
+
 	if ( pInfoMap )
 	{
 		Q_snprintf( pszBuf, iBufLen, "%s_%s", m_pDataSettings->GetString( "game/mode", "survival" ), pInfoMap->GetString( "map" ) );
@@ -2516,19 +2506,11 @@ void Leaderboard::CmdJumpToMe()
 void Leaderboard::CmdLeaderboardHelper( int nOffset )
 {
 	KeyValues *pMissionInfo = NULL;
-#if 0
 	KeyValues *pMapInfo = g_pMatchExtSwarm->GetMapInfo( m_pDataSettings, &pMissionInfo );
-#else
-	KeyValues *pMapInfo = NULL;
-#endif // 0
 	if ( !pMapInfo )
 		return;
 
-#if 0
 	KeyValues *pAllMissions = g_pMatchExtSwarm->GetAllMissions();
-#else
-	KeyValues *pAllMissions = NULL;
-#endif // 0
 	if ( !pAllMissions )
 		return;
 

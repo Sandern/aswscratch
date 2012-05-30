@@ -82,11 +82,7 @@ void InGameChapterSelect::ApplySchemeSettings(vgui::IScheme *pScheme)
 
 	// Get mission and campaign info
 	KeyValues *pInfoMission = NULL;
-#if 0
 	KeyValues *pInfoChapter = g_pMatchExtSwarm->GetMapInfo( pGameSettings, &pInfoMission );
-#else
-	KeyValues *pInfoChapter = NULL;
-#endif // 0
 
 	// Check if this is a custom mission?
 	if ( pInfoMission && !pInfoMission->GetBool( "builtin" ) )
@@ -94,11 +90,7 @@ void InGameChapterSelect::ApplySchemeSettings(vgui::IScheme *pScheme)
 
 	if ( !pInfoMission || !pInfoChapter )
 	{
-#if 0
 		KeyValues *pAllMissions = g_pMatchExtSwarm->GetAllMissions();
-#else
-		KeyValues *pAllMissions = NULL;
-#endif // 0
 		for ( pInfoMission = pAllMissions ? pAllMissions->GetFirstTrueSubKey() : NULL;
 			  pInfoMission; pInfoMission = pInfoMission->GetNextTrueSubKey() )
 		{
@@ -203,12 +195,10 @@ void InGameChapterSelect::OnCommand(const char *command)
 							{
 								pGameSettings->SetString( "game/campaign", szMissionName );
 								pGameSettings->SetInt( "game/chapter", 1 );
-#if 0
 								if ( !g_pMatchExtSwarm->GetMapInfo( pGameSettings ) )
 								{
 									button->SetEnabled( false );
 								}
-#endif // 0
 							}
 						}
 					}
@@ -246,12 +236,10 @@ void InGameChapterSelect::OnCommand(const char *command)
 
 			engine->ClientCmd( CFmtStr( "callvote %s %s;", szVoteCommand, m_chCampaign ) );
 		}
-#if 0
 		else if ( KeyValues *pInfoMap = g_pMatchExtSwarm->GetMapInfo( pGameSettings ) )
 		{
 			engine->ClientCmd( CFmtStr( "callvote %s %s;", szVoteCommand, pInfoMap->GetString( "map" ) ) );
 		}
-#endif // 0
 
 		GameUI().AllowEngineHideGameUI();
 		engine->ClientCmd( "gameui_hide" );

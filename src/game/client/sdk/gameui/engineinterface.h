@@ -30,7 +30,10 @@
 extern class IMatchExtSwarm *g_pMatchExtSwarm;
 #endif
 
-
+#ifdef SDK_DLL
+#include "matchmaking/swarm/imatchext_swarm.h"
+extern class IMatchExtSwarm *g_pMatchExtSwarm;
+#endif
 
 // engine interface singleton accessors
 extern IVEngineClient *engine;

@@ -1826,6 +1826,15 @@
     <ClCompile Include="..\shared\predicted_viewmodel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sdk\vgui\nb_horiz_list.cpp">
+      <Filter>Source Files\sdk\vgui</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\vgui\nb_select_level_entry.cpp">
+      <Filter>Source Files\sdk\vgui</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\vgui\nb_select_level_panel.cpp">
+      <Filter>Source Files\sdk\vgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="achievement_notification_panel.h">
@@ -3987,6 +3996,15 @@
     </ClInclude>
     <ClInclude Include="..\shared\predicted_viewmodel.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\vgui\nb_horiz_list.h">
+      <Filter>Source Files\sdk\vgui</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\vgui\nb_select_level_entry.h">
+      <Filter>Source Files\sdk\vgui</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\vgui\nb_select_level_panel.h">
+      <Filter>Source Files\sdk\vgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

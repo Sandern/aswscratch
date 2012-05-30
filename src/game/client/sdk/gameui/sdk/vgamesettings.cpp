@@ -18,8 +18,7 @@
 #include "EngineInterface.h"
 #include "VLoadingProgress.h"
 #include "VGenericConfirmation.h"
-//#include "nb_select_mission_panel.h"
-//#include "nb_select_campaign_panel.h"
+#include "nb_select_level_panel.h"
 
 #include "vgui_controls/ImagePanel.h"
 #include "vgui_controls/Button.h"
@@ -119,6 +118,10 @@ void GameSettings::UpdateSessionSettings( KeyValues *pUpdate )
 
 void GameSettings::PaintBackground()
 {
+#if SDK_DLL
+	const char *pTitle = "";
+	pTitle = "SDK Create Game";
+#else
 	char chBufferTitle[128];
 	const char *pTitle = "";
 
@@ -143,6 +146,7 @@ void GameSettings::PaintBackground()
 		Q_snprintf( chBufferSubTitle, sizeof( chBufferSubTitle ), "#L4D360UI_Access_%s", szAccess );
 		pSubtitle = chBufferSubTitle;
 	}
+#endif // SDK_DLL
 	m_pTitle->SetText( pTitle );
 /*
 	BaseClass::DrawDialogBackground( pTitle, NULL, pSubtitle, NULL );
@@ -158,7 +162,7 @@ void GameSettings::Activate()
 
 	if ( m_drpGameType )
 	{
-		const char *szGameMode = m_pSettings->GetString( "game/mode", "campaign" );
+		const char *szGameMode = m_pSettings->GetString( "game/mode", "sdk" );
 		if ( szGameMode )
 		{
 			if ( !Q_stricmp( szGameMode, "campaign" ) )
@@ -168,6 +172,10 @@ void GameSettings::Activate()
 			else if ( !Q_stricmp( szGameMode, "single_mission" ) )
 			{
 				m_drpGameType->SetCurrentSelection( "#ASUI_GameType_Single_Mission" );
+			}	
+			else if ( !Q_stricmp( szGameMode, "sdk" ) )
+			{
+				m_drpGameType->SetCurrentSelection( "SDK Level" );
 			}	
 		}
 		UpdateSelectMissionButton();
@@ -451,6 +459,16 @@ void GameSettings::OnCommand(const char *command)
 		UpdateSelectMissionButton();
 		UpdateMissionImage();
 	}
+	else if( V_strcmp( command, "cmd_gametype_sdk" ) == 0 )
+	{
+		KeyValues *kvUpdate = new KeyValues( "update" );
+		kvUpdate->SetString( "game/mode", "sdk" );
+		KeyValues *kvModification = new KeyValues( "settings" );
+		kvModification->AddSubKey( kvUpdate );
+		UpdateSessionSettings( KeyValues::AutoDeleteInline( kvModification ) );
+		UpdateSelectMissionButton();
+		UpdateMissionImage();
+	}
 	else if( V_strcmp( command, "cmd_change_mission" ) == 0 )
 	{
 		ShowMissionSelect();
@@ -465,7 +483,7 @@ void GameSettings::OnCommand(const char *command)
 			"update",
 			" update { "
 			" game { "
-			" mission asi-jac1-landingbay01"
+			" mission sdk_teams_hdr"
 			" } "
 			" } "
 			);
@@ -478,47 +496,22 @@ void GameSettings::OnCommand(const char *command)
 		UpdateSessionSettings( pSettings );
 		UpdateMissionImage();
 	}
-	else if ( char const *szCampaignSelected = StringAfterPrefix( command, "cmd_campaign_selected_" ) )
+	else if( char const *szLevelSelected = StringAfterPrefix( command, "cmd_level_selected_" ) )
 	{
 		KeyValues *pSettings = KeyValues::FromString(
 			"update",
 			" update { "
 			" game { "
-			" campaign jacob"
-			" mission asi-jac1-landingbay01"
+			" mode sdk "
+			" mission sdk_teams_hdr "
 			" } "
 			" } "
 			);
 		KeyValues::AutoDelete autodelete( pSettings );
-
+		
 		char stripped[MAX_PATH];
-		V_StripExtension( szCampaignSelected, stripped, MAX_PATH );
-		pSettings->SetString( "update/game/campaign", stripped );
-
-#if 0
-		// set the current mission to the first real mission in the campaign
-		IASW_Mission_Chooser_Source *pSource = missionchooser ? missionchooser->LocalMissionSource() : NULL;
-		if ( pSource )
-		{
-			KeyValues *pCampaignDetails = pSource->GetCampaignDetails( szCampaignSelected );
-			bool bSkippedFirst = false;
-			for ( KeyValues *pMission = pCampaignDetails->GetFirstSubKey(); pMission; pMission = pMission->GetNextKey() )
-			{
-				if ( !Q_stricmp( pMission->GetName(), "MISSION" ) )
-				{
-					if ( !bSkippedFirst )
-					{
-						bSkippedFirst = true;
-					}
-					else
-					{
-						pSettings->SetString( "update/game/mission", pMission->GetString( "MapName", "asi-jac1-landingbay01" ) );
-						break;
-					}
-				}
-			}
-		}
-#endif // 0
+		V_StripExtension( szLevelSelected, stripped, MAX_PATH );
+		pSettings->SetString( "update/game/mission", szLevelSelected );
 
 		UpdateSessionSettings( pSettings );
 		UpdateMissionImage();
@@ -1016,7 +1009,20 @@ void GameSettings::UpdateMissionImage()
 		}
 	}
 #else
-	return;
+	const char *szGameType = m_pSettings->GetString( "game/mode", "sdk" );
+	if ( !Q_stricmp( szGameType, "sdk" ) )
+	{
+		const char *szMission = m_pSettings->GetString( "game/mission", NULL );
+		if ( szMission )
+		{
+			pMissionLabel->SetText( szMission );
+			menu->SetCurrentSelection( szMission );
+		}
+		if ( m_drpStartingMission )
+		{
+			m_drpStartingMission->SetVisible( false );
+		}
+	}
 #endif // 0
 }
 
@@ -1067,7 +1073,7 @@ void GameSettings::UpdateSelectMissionButton()
 	BaseModHybridButton *button = menu->GetButton(); //dynamic_cast< BaseModHybridButton* >( FindChildByName( "BtnSelectMission", true ) );
 	if ( m_pSettings && button )
 	{
-		const char *szGameType = m_pSettings->GetString( "game/mode", "campaign" );
+		const char *szGameType = m_pSettings->GetString( "game/mode", "sdk" );
 		if ( !Q_stricmp( szGameType, "campaign" ) )
 		{
 			button->SetText( "#ASUI_Select_Campaign" );
@@ -1077,6 +1083,11 @@ void GameSettings::UpdateSelectMissionButton()
 		{
 			button->SetText( "#ASUI_Select_Mission" );
 			button->SetHelpText( "#ASUI_Select_Mission_tt" );
+		}
+		else if( !Q_stricmp( szGameType, "sdk" ) )
+		{
+			button->SetText( "Select Map" );
+			button->SetHelpText( "SDK select map example" );
 		}
 	}
 	/*
@@ -1111,7 +1122,7 @@ void GameSettings::ShowMissionSelect()
 		const char *szGameType = m_pSettings->GetString( "game/mode", "campaign" );
 		if ( !Q_stricmp( szGameType, "campaign" ) )
 		{
-			CNB_Select_Campaign_Panel *pPanel = new CNB_Select_Campaign_Panel( this, "Select_Campaign_Panel" );
+			CNB_Select_Level_Panel *pPanel = new CNB_Select_Level_Panel( this, "Select_Campaign_Panel" );
 			//pPanel->InitList();
 			pPanel->MoveToFront();
 
@@ -1123,6 +1134,18 @@ void GameSettings::ShowMissionSelect()
 		{
 			CNB_Select_Mission_Panel *pPanel = new CNB_Select_Mission_Panel( this, "Select_Mission_Panel" );
 			pPanel->InitList();
+			pPanel->MoveToFront();
+
+			UpdateMissionImage();
+
+			m_hSubScreen = pPanel;
+		}
+#else
+		const char *szGameType = m_pSettings->GetString( "game/mode", "sdk" );
+		if ( !Q_stricmp( szGameType, "sdk" ) )
+		{
+			CNB_Select_Level_Panel *pPanel = new CNB_Select_Level_Panel( this, "Select_Level_Panel" );
+			//pPanel->InitList();
 			pPanel->MoveToFront();
 
 			UpdateMissionImage();

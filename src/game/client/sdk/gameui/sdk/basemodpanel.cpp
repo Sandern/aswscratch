@@ -1224,10 +1224,8 @@ void CBaseModPanel::OnLevelLoadingStarted( char const *levelName, bool bShowProg
 			// It is critical to get map info by the actual levelname that is being loaded, because
 			// for level transitions the server is still in the old map and the game settings returned
 			// will reflect the old state of the server.
-#if 0
 			pChapterInfo = g_pMatchExtSwarm->GetMapInfoByBspName( pGameSettings, levelName, &pMissionInfo );
 			Q_strncpy( chGameMode, pGameSettings->GetString( "game/mode", "" ), ARRAYSIZE( chGameMode ) );
-#endif // 0
 		}
 	}
 	
@@ -1236,10 +1234,8 @@ void CBaseModPanel::OnLevelLoadingStarted( char const *levelName, bool bShowProg
 	{
 		if ( KeyValues *pSettings = pSession->GetSessionSettings() )
 		{
-#if 0
 			pChapterInfo = g_pMatchExtSwarm->GetMapInfo( pSettings, &pMissionInfo );
 			Q_strncpy( chGameMode, pSettings->GetString( "game/mode", "" ), ARRAYSIZE( chGameMode ) );
-#endif // 0
 		}
 	}
 

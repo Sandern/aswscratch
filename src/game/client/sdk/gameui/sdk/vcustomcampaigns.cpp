@@ -224,11 +224,7 @@ void CustomCampaigns::Activate()
 	m_GplCustomCampaigns->RemoveAllPanelItems();
 
 	// Build a list of campaigns
-#if 0
 	KeyValues *pAllMissions = g_pMatchExtSwarm->GetAllMissions();
-#else
-	KeyValues *pAllMissions = NULL;
-#endif // 0
 	if ( !pAllMissions )
 		return;
 
@@ -348,11 +344,7 @@ void CustomCampaigns::Select()
 	if ( !pSelectedItem )
 		return;
 
-#if 0
 	KeyValues *pAllMissions = g_pMatchExtSwarm->GetAllMissions();
-#else
-	KeyValues *pAllMissions = NULL;
-#endif // 0
 	if ( !pAllMissions )
 		return;
 
@@ -400,11 +392,7 @@ void CustomCampaigns::OnItemSelected( const char* panelName )
 	if ( !pSelectedItem )
 		return;
 
-#if 0
 	KeyValues *pAllMissions = g_pMatchExtSwarm->GetAllMissions();
-#else
-	KeyValues *pAllMissions = NULL;
-#endif // 0
 	if ( !pAllMissions )
 		return;
 
