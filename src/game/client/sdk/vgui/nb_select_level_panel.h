@@ -38,7 +38,6 @@ public:
 
 private:
 	CUtlVector<char*> m_MapList;
-	int m_nMapCycleTimeStamp;
 };
 
 #endif // _INCLUDED_NB_SELECT_CAMPAIGN_PANEL_H

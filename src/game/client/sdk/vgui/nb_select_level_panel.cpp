@@ -55,76 +55,73 @@ void CNB_Select_Level_Panel::UpdateLevelList()
 	}
 	else
 	{
-		// If map cycle file has changed or this is the first time through ...
-		if ( m_nMapCycleTimeStamp != nMapCycleTimeStamp )
+		// Clear out existing map list. Not using Purge() because I don't think that it will do a 'delete []'
+		for ( int i = 0; i < m_MapList.Count(); i++ )
 		{
-			// Reset map index and map cycle timestamp
-			m_nMapCycleTimeStamp = nMapCycleTimeStamp;
-		//	m_nMapCycleindex = 0;
+			delete [] m_MapList[i];
+		}
 
-			// Clear out existing map list. Not using Purge() because I don't think that it will do a 'delete []'
+		m_MapList.RemoveAll();
+
+		// Repopulate map list from mapcycle file
+		int nFileLength;
+		char *aFileList = (char*)UTIL_LoadFileForMe( mapcfile, &nFileLength );
+		if ( aFileList && nFileLength )
+		{
+			V_SplitString( aFileList, "\n", m_MapList );
+
 			for ( int i = 0; i < m_MapList.Count(); i++ )
 			{
-				delete [] m_MapList[i];
-			}
+				bool bIgnore = false;
 
-			m_MapList.RemoveAll();
-
-			// Repopulate map list from mapcycle file
-			int nFileLength;
-			char *aFileList = (char*)UTIL_LoadFileForMe( mapcfile, &nFileLength );
-			if ( aFileList && nFileLength )
-			{
-				V_SplitString( aFileList, "\n", m_MapList );
-
-				for ( int i = 0; i < m_MapList.Count(); i++ )
-				{
-					bool bIgnore = false;
-
-					// Strip out the spaces in the name
-					StripChar( m_MapList[i] , '\r');
-					StripChar( m_MapList[i] , ' ');
+				// Strip out the spaces in the name
+				StripChar( m_MapList[i] , '\r');
+				StripChar( m_MapList[i] , ' ');
 						
-					/*
-					if ( !engine->IsMapValid( m_MapList[i] ) )
-					{
-						bIgnore = true;
+				/*
+				if ( !engine->IsMapValid( m_MapList[i] ) )
+				{
+					bIgnore = true;
 
-						// If the engine doesn't consider it a valid map remove it from the lists
-						char szWarningMessage[MAX_PATH];
-						V_snprintf( szWarningMessage, MAX_PATH, "Invalid map '%s' included in map cycle file. Ignored.\n", m_MapList[i] );
-						Warning( szWarningMessage );
-					}
-					else */if ( !Q_strncmp( m_MapList[i], "//", 2 ) )
-					{
-						bIgnore = true;
-					}
-
-					if ( bIgnore )
-					{
-						delete [] m_MapList[i];
-						m_MapList.Remove( i );
-						--i;
-					}
+					// If the engine doesn't consider it a valid map remove it from the lists
+					char szWarningMessage[MAX_PATH];
+					V_snprintf( szWarningMessage, MAX_PATH, "Invalid map '%s' included in map cycle file. Ignored.\n", m_MapList[i] );
+					Warning( szWarningMessage );
+				}
+				else */if ( !Q_strncmp( m_MapList[i], "//", 2 ) )
+				{
+					bIgnore = true;
 				}
 
-				UTIL_FreeFile( (byte *)aFileList );
+				if ( bIgnore )
+				{
+					delete [] m_MapList[i];
+					m_MapList.Remove( i );
+					--i;
+				}
 			}
 
-			// If somehow we have no maps in the list then add the default one
-			if ( 0 == m_MapList.Count() )
-			{
-				m_MapList.AddToTail( szDefaultMapName );
-			}
+			UTIL_FreeFile( (byte *)aFileList );
+		}
 
-			// Now rebuild the level entry list
-			m_pHorizList->m_Entries.PurgeAndDeleteElements();
+		// If somehow we have no maps in the list then add the default one
+		if ( 0 == m_MapList.Count() )
+		{
+			m_MapList.AddToTail( szDefaultMapName );
+		}
 
-			// Create entries
-			for ( int i = 0; i < m_MapList.Count(); i++ )
+		// Create entries
+		for ( int i = 0; i < m_MapList.Count(); i++ )
+		{
+			if ( m_pHorizList->m_Entries.Count() <= i )
 			{
 				CNB_Select_Level_Entry *pEntry = new CNB_Select_Level_Entry( NULL, "Select_Level_Entry", m_MapList[i] );
 				m_pHorizList->AddEntry( pEntry );
+			}
+			else
+			{
+				CNB_Select_Level_Entry *pEntry = dynamic_cast<CNB_Select_Level_Entry*>( m_pHorizList->m_Entries[i].Get() );
+				pEntry->SetMap( m_MapList[i] );
 			}
 		}
 	}

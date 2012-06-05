@@ -45,6 +45,30 @@ these. You can also use sv_consistency convar to turn these checks
 off.
 
 ==============================================================
+Customizing the Main Menu colors
+==============================================================
+
+
+basemodframe.cpp
+    DrawGenericBackground - Used in the generic confirmation screen (e.g. "do you want to exit the game")
+    
+sdk/gameui/vhybridbutton.cpp -> Used in flyout buttons (main menu buttons and other buttons that result in a submenu)
+    PaintButtonEx - Depending on the style, a different color or size is used. Alien Swarm uses BUTTON_ALIENSWARMMENUBUTTON and BUTTON_ALIENSWARMMENUBUTTONSMALL.
+
+sdk/vgui/nb_header_foot.cpp -> Provides a generic header/footer/background for panels. Used in "Create Game" and "Options" menus.
+    ApplySchemeSettings - Change back background color. Alien Swarm uses a blueish tint.
+    CNB_Gradient_Bar::PaintBackground - Change background and border color
+
+sdk/vgui/nb_header_button.cpp
+
+sdk/gameui/Optionssubkeyboard.cpp -> Alien Swarm Scheme
+
+==============================================================
+Matchmaking
+==============================================================
+
+
+==============================================================
 Base Code Changes
 ==============================================================
 Client changes:

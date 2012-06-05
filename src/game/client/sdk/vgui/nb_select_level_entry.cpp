@@ -22,8 +22,7 @@ CNB_Select_Level_Entry::CNB_Select_Level_Entry( vgui::Panel *parent, const char 
 	m_pImage->AddActionSignalTarget( this );
 	m_pImage->SetCommand( "LevelClicked" );
 
-	m_szLevelName[0] = 0;
-	Q_strncpy( m_szLevelName, levelname, 256 );
+	SetMap( levelname );
 }
 
 CNB_Select_Level_Entry::~CNB_Select_Level_Entry()
@@ -71,4 +70,10 @@ void CNB_Select_Level_Entry::OnCommand( const char *command )
 			pPanel->LevelSelected( m_szLevelName );
 		}
 	}
+}
+
+void CNB_Select_Level_Entry::SetMap( const char *levelname )
+{
+	m_szLevelName[0] = 0;
+	Q_strncpy( m_szLevelName, levelname, 256 );
 }

@@ -23,7 +23,8 @@ public:
 	virtual void PerformLayout();
 	virtual void OnThink();
 	virtual void OnCommand( const char *command );
-	
+	void		SetMap( const char *levelname );
+
 	// == MANAGED_MEMBER_POINTERS_START: Do not edit by hand ==
 	CBitmapButton	*m_pImage;
 	vgui::Label	*m_pName;

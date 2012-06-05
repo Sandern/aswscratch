@@ -1327,7 +1327,7 @@ void CHLClient::Shutdown( void )
 
 #ifndef NO_STEAM
 	g_SteamAPIContext.Clear();
-	// SteamAPI_Shutdown(); << Steam shutdown is controlled by engine
+	// SteamAPI_Shutdown(); // << Steam shutdown is controlled by engine
 #ifdef INFESTED_DLL
 	
 #endif
