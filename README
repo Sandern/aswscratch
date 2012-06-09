@@ -35,6 +35,15 @@ The Alien Swarm VPK files take priority over the mod files.
 To solve this use either the "-override_vpk" or pack the files
 being overriden in a vpk file (see pakfiles.bat/txt).
 
+
+==============================================================
+Sounds
+==============================================================
+When the file "maps\soundcache\_master.cache" is not present,
+it will rebuild the audio cache the next time you start the mod.
+When you make changes to sounds, you will need to execute 
+snd_updateaudiocache.
+
 ==============================================================
 Alien Swarm Consistency checks
 ==============================================================
