@@ -16,17 +16,16 @@ Usage
 ==============================================================
 1. Copy the scratch folder into your sourcemods directory.
 2. Open scratch_sdk.sln in Visual Studio 2010.
-3. Change paths so the binaries are copied into the correct folder.
-     - Right click the server project and open properties
-     - Go to Configuration Properties -> Build Events
-     - Ensure paths Pre-Build and Post-Build events point to your sourcemods folder.
-     - Do the same for the client project
+3. A script is included to automatically copy the binaries
+   into the mod bin folder (dllcopy.wsf). Modify this script
+   if you want to change the output path (or remove it and 
+   change the output paths in Visual Studio).
 4. Compile
 5. Check if binaries are copied correctly into your mods bin folder.
 6. Either run pakfiles.bat (in the mod folder) or specify "-override_vpk"
    in the launch parameters. Otherwise some files will be overriden
-   by the alien swarm files (like scripts/HudLayout.res).
-6. Start the mod, open the console and type "map sdk_teams_hdr"
+   by the Alien Swarm files (for example, scripts/HudLayout.res).
+6. Start the mod, open the console and type "map sdk_teams_hdr".
 
 ==============================================================
 VPK
@@ -34,7 +33,6 @@ VPK
 The Alien Swarm VPK files take priority over the mod files.
 To solve this use either the "-override_vpk" or pack the files
 being overriden in a vpk file (see pakfiles.bat/txt).
-
 
 ==============================================================
 Sounds
@@ -56,21 +54,25 @@ off.
 ==============================================================
 Customizing the Main Menu colors
 ==============================================================
+In case you want to modify the colors of the main menu, the
+following is a quick list of places which you will want to modify
+because they contain hard coded colors:
 
+basemodpanel.cpp - SetScheme - most panels get the scheme from this panel, so you can change the scheme res file here.
 
 basemodframe.cpp
-    DrawGenericBackground - Used in the generic confirmation screen (e.g. "do you want to exit the game")
+    DrawGenericBackground - Used in the generic confirmation screen (e.g. "do you want to exit the game"). Contains hard coded background colors.
     
 sdk/gameui/vhybridbutton.cpp -> Used in flyout buttons (main menu buttons and other buttons that result in a submenu)
     PaintButtonEx - Depending on the style, a different color or size is used. Alien Swarm uses BUTTON_ALIENSWARMMENUBUTTON and BUTTON_ALIENSWARMMENUBUTTONSMALL.
 
-sdk/vgui/nb_header_foot.cpp -> Provides a generic header/footer/background for panels. Used in "Create Game" and "Options" menus.
+sdk/vgui/nb_header_foot.cpp - Provides a generic header/footer/background for panels. Used in "Create Game" and "Options" menus.
     ApplySchemeSettings - Change back background color. Alien Swarm uses a blueish tint.
     CNB_Gradient_Bar::PaintBackground - Change background and border color
 
-sdk/vgui/nb_header_button.cpp
+sdk/vgui/nb_button.cpp - Generic button class used about everywhere where vhybridbutton is not used. Contains some hard coded colors.
 
-sdk/gameui/Optionssubkeyboard.cpp -> Alien Swarm Scheme
+sdk/gameui/Optionssubkeyboard.cpp - Does not copy the scheme from basemodpanel, so you might want to change this.
 
 ==============================================================
 Matchmaking
