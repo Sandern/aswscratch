@@ -17,7 +17,6 @@ public:
 	DECLARE_CLASS( ClientModeSDK, ClientModeShared );
 
 	virtual void	Init();
-	virtual void	InitWeaponSelectionHudElement() { return; }
 	virtual void	InitViewport();
 	virtual void	Shutdown();
 
@@ -25,8 +24,8 @@ public:
 	virtual void	LevelShutdown( void );
 	virtual void	FireGameEvent( IGameEvent *event );
 	virtual void	DoPostScreenSpaceEffects( const CViewSetup *pSetup );
-	virtual void SDK_CloseAllWindows();
-	virtual void SDK_CloseAllWindowsFrom(vgui::Panel* pPanel);	
+	virtual void	SDK_CloseAllWindows();
+	virtual void	SDK_CloseAllWindowsFrom(vgui::Panel* pPanel);	
 };
 
 extern IClientMode *GetClientModeNormal();

@@ -14,7 +14,6 @@
 #include "filesystem.h"
 
 
-#if 0
 #ifdef CLIENT_DLL
 	#include "c_baseplayer.h"
 	#include "engine/ivdebugoverlay.h"
@@ -28,21 +27,6 @@
 	ConVar showanimstate_log( "sv_showanimstate_log", "0", FCVAR_CHEAT | FCVAR_DEVELOPMENTONLY, "1 to output sv_showanimstate to Msg(). 2 to store in AnimStateServer.log. 3 for both." );
 	ConVar showanimstate_activities( "sv_showanimstate_activities", "1", FCVAR_CHEAT | FCVAR_DEVELOPMENTONLY, "Show activities in the (server) animation state display." );
 #endif
-#else
-#ifdef CLIENT_DLL
-	#include "c_baseplayer.h"
-	#include "engine/ivdebugoverlay.h"
-
-	ConVar cl_showanimstate( "cl_showanimstate", "-1", FCVAR_CHEAT, "Show the (client) animation state for the specified entity (-1 for none)." );
-	ConVar showanimstate_log( "cl_showanimstate_log", "0", FCVAR_CHEAT, "1 to output cl_showanimstate to Msg(). 2 to store in AnimStateClient.log. 3 for both." );
-	ConVar showanimstate_activities( "cl_showanimstate_activities", "1", FCVAR_CHEAT, "Show activities in the (client) animation state display." );
-#else
-	#include "player.h"
-	ConVar sv_showanimstate( "sv_showanimstate", "-1", FCVAR_CHEAT, "Show the (server) animation state for the specified entity (-1 for none)." );
-	ConVar showanimstate_log( "sv_showanimstate_log", "0", FCVAR_CHEAT, "1 to output sv_showanimstate to Msg(). 2 to store in AnimStateServer.log. 3 for both." );
-	ConVar showanimstate_activities( "sv_showanimstate_activities", "1", FCVAR_CHEAT, "Show activities in the (server) animation state display." );
-#endif
-#endif // 0
 
 // NOTE: This has to be the last file included!
 #include "tier0/memdbgon.h"
@@ -808,7 +792,6 @@ int CBasePlayerAnimState::ConvergeAngles( float goal,float maxrate, float maxgap
 		anglediff = goal - current;
 		anglediff = AngleNormalize( anglediff );
 		anglediffabs = fabs( anglediff );
-		Msg( "jumped = %f\n", flTooFar );
 	}
 
 	if ( anglediffabs < maxmove )
