@@ -2071,9 +2071,6 @@
     <ClInclude Include="..\shared\hintsystem.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\common\hl2orange.spa.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="hltvdirector.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -2509,9 +2506,6 @@
     <ClInclude Include="hl2\rotorwash.h">
       <Filter>Source Files\From HL2</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\public\mathlib\amd3dx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\shared\ammodef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -2525,9 +2519,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="basetempentity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\public\basetypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\shared\beam_flags.h">
@@ -2555,9 +2546,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\public\mathlib\bumpvects.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\public\cache_user.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\shared\cellcoord.h">
@@ -2590,9 +2578,6 @@
     <ClInclude Include="..\..\public\Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\public\commonmacros.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\public\mathlib\compressed_light_cube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -2612,9 +2597,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="damagemodifier.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\public\tier1\datalru.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\public\datamap.h">
@@ -2773,9 +2755,6 @@
     <ClInclude Include="..\..\public\vgui\ILocalize.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\public\ImageLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\public\materialsystem\imaterial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -2836,9 +2815,6 @@
     <ClInclude Include="..\shared\IVehicle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\public\engine\IVEngineCache.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\public\engine\ivmodelinfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -2894,9 +2870,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\public\vphysics\object_hash.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\shared\particle_dispatch_shared.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="particle_system.h">
@@ -3076,9 +3049,6 @@
     <ClInclude Include="..\..\public\tier1\utldict.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\public\tier1\utlfixedlinkedlist.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\public\tier1\utlfixedmemory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -3119,12 +3089,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\public\vcollide_parse.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\public\tier0\vcr_shared.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\public\tier0\vcrmode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\public\mathlib\vector.h">
