@@ -2197,9 +2197,6 @@
     <ClInclude Include="fx_blood.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cstrike\fx_cs_blood.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="fx_discreetline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -2291,9 +2288,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hud_pdump.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cstrike\hud_radar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hud_vehicle.h">
@@ -3259,9 +3253,6 @@
     <ClInclude Include="..\shared\base_playeranimstate.h">
       <Filter>Game Shared Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\shared\cstrike\basecsgrenade_projectile.h">
-      <Filter>Game Shared Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\shared\baseentity_shared.h">
       <Filter>Game Shared Header Files</Filter>
     </ClInclude>
@@ -3341,9 +3332,6 @@
       <Filter>Game Shared Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\shared\func_ladder.h">
-      <Filter>Game Shared Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\shared\cstrike\fx_cs_shared.h">
       <Filter>Game Shared Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\shared\gameeventdefs.h">
@@ -3578,15 +3566,6 @@
       <Filter>Game Shared Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\shared\vphysics_sound.h">
-      <Filter>Game Shared Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\shared\cstrike\weapon_flashbang.h">
-      <Filter>Game Shared Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\shared\cstrike\weapon_hegrenade.h">
-      <Filter>Game Shared Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\shared\weapon_ifmsteadycam.h">
       <Filter>Game Shared Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\shared\weapon_parse.h">
